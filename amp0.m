@@ -15,7 +15,7 @@ ampsim_MSE(1) = norm(x_true - x,2).^2/N;
 for i=1:inter_max
     x = wthresh(A'*z + x,'s',sqrt(tau2));
     
-    eta_prime = 1/N * nnz(wthresh(A'*z + x,'s',sqrt(tau2)));
+    eta_prime = 1/N * nnz(x);
     z = y - A*x + 1/delta * z * eta_prime;
 %     eta_prime = 1/N * nnz(wthresh(A'*z + x,'s',sqrt(tau2)));
 %     tau2 = tau2/delta * eta_prime;
