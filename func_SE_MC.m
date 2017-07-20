@@ -5,7 +5,6 @@ function [ se_tau2, se_mse ] = func_SE_MC(tau2, delta, rho, sigmaw2)
   
 if(sigmaw2 == 0)
     deniser_parameter = sqrt(tau2);
-
 else
     lambda = 0.5;
     deniser_parameter = sqrt(lambda+lambda*tau2);
