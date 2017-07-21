@@ -55,7 +55,7 @@ for mc=1:MC
     
     %% AMP Reconstruction analysis
     if(sigmaw2 == 0)
-        [x_AMP, se_tau2, se_mse] = amp0(A, y, x, inter_max);
+        [x_AMP, se_tau2, se_mse] = amp0_new(A, y, x, inter_max);
     else
         [x_AMP, se_tau2, se_mse] = ampa(A, y, x, inter_max);
     end

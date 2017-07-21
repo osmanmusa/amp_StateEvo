@@ -5,8 +5,8 @@ M = 2000;
 delta = M/N;
 
 Ks = [50 500];
-MC_simulation = 10;
-inter_max = 10;
+MC_simulation = 10*2;
+inter_max = 20;
 
 se_tau2 = zeros(inter_max+1,1);
 se_mse = zeros(inter_max+1,1);
