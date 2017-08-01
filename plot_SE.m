@@ -1,8 +1,8 @@
 %% Simulation parameters
 vector_of_K = [5 50 500];
-MC_simulation = 2;
+MC_simulation = 10*4;
 inter_max = 20;
-snr_proxy = 0.0;
+snr = 6.9;
 
 % allocating zero vectors
 se_tau2 = zeros(inter_max,1);
@@ -15,14 +15,15 @@ for index = 1:length(vector_of_K)
     
     %% Problem parameters
     K = vector_of_K(index);
+    
     N = 4000;
     M = 800;
     delta = M/N;
     rho = K/N;
-    sigmaw2 = snr_proxy*K/N; %K/N is the power of x
+    sigmaw2 = K/M * 10^(-snr/10);
     lambda = 0.1;
     
-    %% Numerical simulation
+    %% Numerical simulation: choose one from below and comment the other
     % starts a new set of simulatios
     [ampsim_tau2, ampsim_mse] = mseagainstt(N, K, MC_simulation, M, sigmaw2, lambda, inter_max); 
     % loads the simulation results from a file, e.g. "SE K=50.mat"
