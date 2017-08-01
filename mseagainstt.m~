@@ -1,8 +1,5 @@
 function [ ampsim_tau2, ampsim_mse ] = mseagainstt(N, K, MC, M, sigmaw2, lambda, inter_max)
-
-% mseagainstt - performs monte-carlo simulation to get averaged effective
-% variance and mse accross iterations
-%
+% mseagainstt - this function provides
 % Inputs:
 % N         - size of vector x
 % K         - sparsity level
@@ -31,7 +28,6 @@ ampsim_mse_single = zeros(inter_max, MC);
 %% Start Monte-Carlo loop % parfor
 for mc=1:MC
 %         disp(sprintf('-----------The %d. iteration of mc loop-----------',mc));
-
     %% Sensing matrix 
     A_unnormalized = sqrt(1/M)*randn(M,N);
     s = sqrt(sum(A_unnormalized.^2));
@@ -48,20 +44,21 @@ for mc=1:MC
 %     x = abs(x);
 
 %     x(ind(1:K)) = sign(randn(K,1)); % create a +-1 K-sparse source
-    %% Measurement process
+    
+%     fprintf('Transmit vector power 1/M norm(Ax)^2 = %f \n', 1/M*norm(A*x)^2)
+    
     noise = sqrt(sigmaw2)*randn(M,1);
     signal = A*x;
     y = signal + noise;
     
-    %     fprintf('Signal power 1/M norm(Ax)^2 = %f \n', 1/M*norm(signal)^2) 
-    fprintf('%d. iteration: snr = %.3f \n', mc, snr(signal,noise));
+    fprintf('snr = %.3f; ',snr(signal,noise));
     
 %     figure
 %     plot(signal)
 %     hold on
 %     plot(noise,'r')
     
-    %% AMP Reconstruction
+    %% AMP Reconstruction analysis
     amp0 = (sigmaw2 == 0);
     [x_AMP, se_tau2, se_mse] = amp(A, y, lambda, x, amp0, inter_max);
     
