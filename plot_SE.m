@@ -1,19 +1,20 @@
-function [] = plot_SE()
-
-% simulation parameters
-Ks = [5 50 500];
+%% Simulation parameters
+vector_of_K = [5 50 500];
 MC_simulation = 2;
 inter_max = 20;
 snr_proxy = 0.0;
 
+% allocating zero vectors
 se_tau2 = zeros(inter_max,1);
 se_mse = zeros(inter_max,1);
 
 figure
-for index = 1:length(Ks)
+
+%% Plotting graphs for each K
+for index = 1:length(vector_of_K)
     
     %% Problem parameters
-    K = Ks(index);
+    K = vector_of_K(index);
     N = 4000;
     M = 800;
     delta = M/N;
@@ -35,7 +36,7 @@ for index = 1:length(Ks)
     end
     
     %% plots in dB
-    subplot(length(Ks),2,2*index-1)
+    subplot(length(vector_of_K),2,2*index-1)
     plot([0:inter_max-1], 10*log10(ampsim_tau2),'m-');
     hold on
     plot([0:inter_max-1], 10*log10(ampsim_mse),'c-');
@@ -46,7 +47,7 @@ for index = 1:length(Ks)
     xlabel('iteration #')
     title(sprintf('K=%d, rho=%.3f',K,K/N))
     %% plots in magnitude    
-    subplot(length(Ks),2,2*index)  
+    subplot(length(vector_of_K),2,2*index)  
     plot([0:inter_max-1], ampsim_tau2,'m-');
     hold on
     plot([0:inter_max-1], ampsim_mse,'c-');
@@ -57,5 +58,4 @@ for index = 1:length(Ks)
     ylabel('MSE')
     xlabel('iteration #')
     title(sprintf('K=%d, rho=%.3f',K,K/N))
-end
 end

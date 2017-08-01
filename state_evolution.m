@@ -5,8 +5,9 @@ function [ se_tau2, se_mse ] = state_evolution(tau2, delta, rho, sigmaw2, lambda
 % Inputs:
 % tau2      - the effective noise variance from the previous interation
 % delta     - the measurement ratio (M/N)
-% SigmaW    - the variance of the noise.
-% rho       - the probability of a nonzero component, i.e., sparsity ratio (K/N).
+% rho       - the probability of a nonzero component, i.e., sparsity ratio (K/N)
+% sigmaw2   - the variance of the noise
+% lambda    - denoiser parameter in the noisy case
 %
 % Outputs:
 % tau2      - the effective noise variance
